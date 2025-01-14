@@ -1,0 +1,33 @@
+[project]  
+name = "slack-bot"  
+version = "0.1.0"  
+authors = [  
+    { name="Josu", email="josue.curto@gmail.com" }  
+]  
+description = "A simple Slack bot for sending messages to channels and users"  
+readme = "README.md"  
+requires-python = ">=3.6"  
+classifiers = [  
+    "Programming Language :: Python :: 3",  
+    "License :: OSI Approved :: MIT License",  
+    "Operating System :: OS Independent"  
+]  
+
+dependencies = [
+    "slack-sdk", # Only keep this if your bot actually needs it to run
+    "ipykernel",
+    "slack-bolt>=1.21.3",
+]  
+
+[build-system]  
+requires = ["setuptools>=59.6.0", "wheel"]  
+build-backend = "setuptools.build_meta"  
+
+[project.optional-dependencies]  
+dev = [  
+    "build>=0.9.0",  
+    "twine>=3.8.0"  
+]  
+
+[project.urls]  
+"Homepage" = "https://github.com/yourusername/slack-bot"  # Replace with your actual GitHub URL  
