@@ -1,5 +1,5 @@
 [project]  
-name = "slack-bot"  
+name = "slack_bot"  
 version = "0.1.0"  
 authors = [  
     { name="Josu", email="josue.curto@gmail.com" }  
@@ -30,4 +30,4 @@ dev = [
 ]  
 
 [project.urls]  
-"Homepage" = "https://github.com/yourusername/slack-bot"  # Replace with your actual GitHub URL  
+"Homepage" = "https://github.com/Josuerinho/slack_bot.git"

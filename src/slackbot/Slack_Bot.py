@@ -1,3 +1,5 @@
+__all__ = ['EnhancedSlackBot'] # this restricts the import to only the EnhancedSlackBot class and nothing else when doing import *
+
 from slack_sdk import WebClient  
 from slack_sdk.errors import SlackApiError  
 from datetime import datetime
@@ -11,10 +13,10 @@ import os
 
 class EnhancedSlackBot:  
     def __init__(self, config_path):  
-        self.config = self.load_config(config_path)  
-        self.client = WebClient(token=self.config['slack_token'])  
+        self.config = self._load_config(config_path)  
+        self._client = WebClient(token=self.config['slack_token'])  
 
-    def load_config(self, config_path):  
+    def _load_config(self, config_path):  
         """Load configuration from JSON file"""  
         file_extension = os.path.splitext(config_path)[1].lower()  
 
@@ -27,7 +29,7 @@ class EnhancedSlackBot:
         except FileNotFoundError:  
             raise FileNotFoundError(f"Config file not found: {config_path}")  
     
-    def send_message(self, channel_name, message):  
+    def _send_message(self, channel_name, message):  
         
         try:  
             
@@ -35,7 +37,7 @@ class EnhancedSlackBot:
             if not channel:  
                 raise ValueError(f"Channel '{channel_name}' not found in config")  
             
-            response = self.client.chat_postMessage(  
+            response = self._client.chat_postMessage(  
                 channel=channel,  
                 text=message  
             )  
@@ -44,12 +46,12 @@ class EnhancedSlackBot:
             print(f"Error sending message: {e.response['error']}")  
             return None  
 
-    def send_formatted_message(self, channel_name, message, emoji=":robot_face:"):  
+    def _send_formatted_message(self, channel_name, message, emoji=":robot_face:"):  
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  
         formatted_message = f"{emoji} *Bot Message* ({timestamp})\n{message}"  
-        return self.send_message(channel_name, formatted_message)  
+        return self._send_message(channel_name, formatted_message)  
 
-    def send_block_message(self, channel_name, header, content, footer=""):  
+    def _send_block_message(self, channel_name, header, content, footer=""):  
         blocks = [  
             {  
                 "type": "header",  
@@ -84,7 +86,7 @@ class EnhancedSlackBot:
             if not channel:  
                 raise ValueError(f"Channel '{channel_name}' not found in config")  
 
-            response = self.client.chat_postMessage(  
+            response = self._client.chat_postMessage(  
                 channel=channel,  
                 blocks=blocks  
             )  
@@ -94,10 +96,10 @@ class EnhancedSlackBot:
             return None  
 
 
-    def invite_bot_to_channel(self, channel_name):  
+    def _invite_bot_to_channel(self, channel_name):  
         try:  
             # Get your bot's user ID first  
-            bot_info = self.client.auth_test() 
+            bot_info = self._client.auth_test() 
             bot_user_id = bot_info["user_id"]  
 
             channel=self.config['channels'].get(channel_name)
@@ -105,7 +107,7 @@ class EnhancedSlackBot:
                 raise ValueError(f"Channel '{channel_name}' not found in config")  
             
             # Invite the bot to the channel  
-            result = self.client.conversations_invite(  
+            result = self._client.conversations_invite(  
                 channel=channel,  
                 users=[bot_user_id]  
             )  
@@ -121,13 +123,13 @@ class EnhancedSlackBot:
 
         try:  
             if email:
-                user_id = self.get_user_id(email)
+                user_id = self._get_user_id(email)
 
                 if not user_id:  
                     raise ValueError(f"User mail: '{email}' doesn't have an associated Slack ID. Are you in the SimsLab group?")
                 
                 # This will create a DM channel if it doesn't exist  
-                response = self.client.chat_postMessage(  
+                response = self._client.chat_postMessage(  
                     channel=user_id,  # You can directly use the user ID here  
                     text=formatted_message  
                 )
@@ -139,7 +141,7 @@ class EnhancedSlackBot:
 
 
                 # This will create a DM channel if it doesn't exist  
-                response = self.client.chat_postMessage(  
+                response = self._client.chat_postMessage(  
                     channel=user_id,  # You can directly use the user ID here  
                     text=formatted_message  
                 )  
@@ -147,20 +149,20 @@ class EnhancedSlackBot:
         except SlackApiError as e:  
             print(f"Error sending DM: {e.response['error']}")  
 
-    def get_user_id(self, email):  
+    def _get_user_id(self, email):  
         """Get user ID from email address"""  
         try:  
-            response = self.client.users_lookupByEmail(email=email)  
+            response = self._client.users_lookupByEmail(email=email)  
             return response['user']['id']  
         except SlackApiError as e:  
             print(f"Error looking up user: {e.response['error']}")  
             return None
 
-    def get_channel_id(self, channel_name):  
+    def _get_channel_id(self, channel_name):  
         try:  
             cursor = None # is None by default by it's just for explainability. This way, we start with "page 1" of all list of channels
             while True:  
-                result = self.client.conversations_list(cursor=cursor)
+                result = self._client.conversations_list(cursor=cursor)
                 for channel in result['channels']:  
                     if channel['name'] == channel_name:  
                         return channel['id']  
