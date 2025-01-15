@@ -6,11 +6,6 @@ from datetime import datetime
 import json
 import os  
 
-# Usage  
-# SLACK_TOKEN = "xoxb-your-token-here"  
-# client = WebClient(token=SLACK_TOKEN)  
-# invite_bot_to_channel(client, "C0123456789")  # Replace with your channel ID  
-
 class EnhancedSlackBot:  
     def __init__(self, config_path):  
         self.config = self._load_config(config_path)  
@@ -173,21 +168,3 @@ class EnhancedSlackBot:
         except SlackApiError as e:  
             print(f"Error listing conversations: {e.response['error']}")  
             return None  
-
-# Usage example  
-# if __name__ == "__main__":
-#     bot = EnhancedSlackBot(SLACK_TOKEN)  
-
-#     # Simple message  
-#     bot.send_message("#general", "Hello from Python Bot! 🐍")  
-
-#     # Formatted message with timestamp  
-#     bot.send_formatted_message("#general", "This is a formatted message!")  
-
-#     # Block message with header and footer  
-#     bot.send_block_message(  
-#         "#general",  
-#         "Important Announcement",  
-#         "This is the main content of the message.\nIt can contain multiple lines!",  
-#         "Sent by Python Bot"  
-#     )  
