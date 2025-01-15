@@ -72,7 +72,7 @@ The method will raise a ValueError if:
 
 ## One-liner usage:
 
-The package can also be run without stable installation. If you have `uv` installed, you can do the following:
+The package can also be run without stable installation. If you have the Rust package manager [`uv`](https://docs.astral.sh/uv/getting-started/installation/) installed, you can do the following:
 
 ```bash
 
