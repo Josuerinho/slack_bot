@@ -76,7 +76,7 @@ The package can also be run without stable installation. If you have `uv` instal
 
 ```bash
 
-uvx --from sims-slack-bot python -c 'from sims_slack_bot import EnhancedSlackBot;bot = EnhancedSlackBot("/Users/jc5737/config.json");bot.send_dm("user_name", "Hello World!")'
+uvx --from sims-slack-bot python -c 'from sims_slack_bot import EnhancedSlackBot;bot = EnhancedSlackBot("config.json");bot.send_dm("user_name", "Hello World!")'
 
 ```
 
