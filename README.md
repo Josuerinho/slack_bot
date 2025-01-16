@@ -82,3 +82,9 @@ uvx --from sims-slack-bot python -c 'from sims_slack_bot import EnhancedSlackBot
 
 This will create a venv on the fly, download the required packages, install them and run the python. Once done, the venv will be deleted. Because all is done in Rust, it takes less than 2 seconds.
 
+## Task List
+
+    - [x] First release. Private DMs.
+    - [ ] Second release: Improved functionality (Channel messages/Invite bot to channels, schedule events, funny bot interactions...).
+    - [ ] ...?
+    - [ ] X Release: Own local LLM. Allow for inline questions and answers with our own trained model.
