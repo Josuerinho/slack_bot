@@ -84,7 +84,7 @@ This will create a venv on the fly, download the required packages, install them
 
 ## Task List
 
-    - [x] First release. Private DMs.
-    - [ ] Second release: Improved functionality (Channel messages/Invite bot to channels, schedule events, funny bot interactions...).
-    - [ ] ...?
-    - [ ] X Release: Own local LLM. Allow for inline questions and answers with our own trained model.
+- [x] First release. Private DMs.
+- [ ] Second release: Improved functionality (Channel messages/Invite bot to channels, schedule events, funny bot interactions...).
+- [ ] ...?
+- [ ] X Release: Own local LLM. Allow for inline questions and answers with our own trained model.
